@@ -8,27 +8,34 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class App {
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("HI~ WORLD");
+		System.out.println("HI WORLD");
+		Menu menu = new Menu();
+		menu.start();
+		while(menu.canContinue()) {
+			menu.start();
+		}
+		System.out.println("BAIIIII");
+	}
+}
+
+
+
+/*
+public class App {
+	public static void main(String[] args) {
+		System.out.println("HI WORLD");
 		DatabaseDAO db = new DatabaseDAO();
-		//List<Park> parks = new ArrayList<Park>();
-		//try ( db.getAllParks(parks) ){
-		try ( List<Park> parks = db.getAllParks() ){
-			ListIterator<Park> parkIt = parks.listIterator();
-			Park park = new Park();
-			while(parkIt.hasNext()) {
-				park = parkIt.next();
+	
+		try {
+			ArrayList<Park> parks = db.getAllParks();
+			for(Park park : parks) {
 				System.out.printf("--------\n%s\n", park.getInfo());
 			}
 		} catch (SQLException ex) {       
 			Logger lgr = Logger.getLogger(App.class.getName());
 			lgr.log(Level.SEVERE, ex.getMessage(), ex);
 		}
-		
-		
 	}
-
-	
 }
+*/
