@@ -3,6 +3,9 @@ package reserver;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
+
+import reserver.Campground.Action;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -56,7 +59,7 @@ public class Park {
 	
 
 	public String getInfo() {
-		return String.format("%s [%d]\n", this.m_name, m_parkId)
+		return String.format("%s [%d]\n", m_name, m_parkId)
 		     + String.format("Location        : %s\n", m_location)
 		     + String.format("Established     : %s\n", m_establishDate)
 		     + String.format("Area            : %,d sq km\n", m_area)
@@ -78,6 +81,7 @@ public class Park {
 		BACK("Return to Previous Screen");
 		
 		private final String description;
+		
 		Action(String desc) {
 			this.description = desc;
 		}
@@ -94,4 +98,47 @@ public class Park {
 		return actionList;
 	}
 	
+	public ArrayList<Action> getCampgroundActions() {
+		ArrayList<Action> actionList = new ArrayList<Action>();
+		actionList.add(Action.SEARCH);
+		actionList.add(Action.BACK);
+		return actionList;
+	}
+	
+	public enum SearchPrompt {
+		CAMPGROUND("Which campground # (0 to cancel)", "campground_id"),
+		ARRIVE("What is the arrival date? (mm/dd/yyyy)", "from_date"),
+		DEPART("What is the departure date? (mm/dd/yy)", "to_date");
+		
+		private final String prompt;
+		private final String field;
+		
+		SearchPrompt(String promptStr, String dbField) {
+			this.prompt = promptStr;
+			this.field  = dbField;
+		}
+		
+		public String getPrompt() {
+			return this.prompt;
+		}
+		
+		public String getField() {
+			return this.field;
+		}
+	}
+	
+	public ArrayList<SearchPrompt> getParkPrompts() {
+		ArrayList<SearchPrompt> promptList = new ArrayList<SearchPrompt>();
+		promptList.add(SearchPrompt.ARRIVE);
+		promptList.add(SearchPrompt.DEPART);
+		return promptList;
+	}
+	
+	public ArrayList<SearchPrompt> getCampgroundPrompts() {
+		ArrayList<SearchPrompt> promptList = new ArrayList<SearchPrompt>();
+		promptList.add(SearchPrompt.CAMPGROUND);
+		promptList.add(SearchPrompt.ARRIVE);
+		promptList.add(SearchPrompt.DEPART);
+		return promptList;
+	}
 }

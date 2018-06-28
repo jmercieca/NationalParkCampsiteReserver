@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.Map;
 
 public class Menu {
-	
+	/*********
 	private DatabaseDAO m_db;
 	private ArrayList<Park> m_parkList;
 	//private Scanner in;
@@ -130,6 +130,8 @@ public class Menu {
 	public void showCampsites(Park park) {
 		
 	}
+	***************************/
+	
 	/**
 	public void displayOptions(ArrayList optsList, String userInstructions) {
 		System.out.println(userInstructions);
